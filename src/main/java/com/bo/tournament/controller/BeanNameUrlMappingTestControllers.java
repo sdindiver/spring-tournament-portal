@@ -16,6 +16,7 @@ public class BeanNameUrlMappingTestControllers {
 		@Override
 		protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response)
 				throws Exception {
+			System.out.println("----------");
 			ModelAndView data = new ModelAndView();
 			data.addObject("value", "indiver");
 			return data;
