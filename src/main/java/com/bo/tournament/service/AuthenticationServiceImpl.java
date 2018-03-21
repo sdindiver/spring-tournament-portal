@@ -21,7 +21,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 	private AuthenticationFailureHandler failureHandler;
 
 	@Inject
-	public AuthenticationServiceImpl(@Qualifier(value = "UserMgmtJpaDaoImpl") UserMgmtDao userMgmtDao,
+	public AuthenticationServiceImpl(/*@Qualifier(value = "UserMgmtJpaDaoImpl") */UserMgmtDao userMgmtDao,
 			@Qualifier(value = "JWTAuthenticationSuccessHandler") AuthenticationSuccessHandler successHandler,
 			AuthenticationFailureHandler failureHandler) {
 		this.userMgmtDao = userMgmtDao;

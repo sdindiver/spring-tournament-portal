@@ -16,6 +16,7 @@ import com.bo.tournament.model.Account;
 import com.bo.tournament.service.JWTAuthenticationSuccessHandler;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -58,7 +59,7 @@ public class JWTTokenManager {
 				return webToken;
 			}
 			
-		}catch(SignatureException e){
+		}catch(ExpiredJwtException|SignatureException e){
 			return null;
 		}
 		return null;

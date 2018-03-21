@@ -31,11 +31,11 @@ public class AuthenticationAspect {
 	private AuthenticationType authenticationType;
 
 	@Around(value = "@annotation(com.bo.tournament.annotations.Authenticated)", argNames = "pjp")
-	public void checkAuthenticationMethod(ProceedingJoinPoint pjp) throws Throwable {
-		checkAuthentication(pjp);
+	public Object checkAuthenticationMethod(ProceedingJoinPoint pjp) throws Throwable {
+		return checkAuthentication(pjp);
 	}
 
-	private void checkAuthentication(ProceedingJoinPoint jointPoint) throws Throwable {
+	private Object checkAuthentication(ProceedingJoinPoint jointPoint) throws Throwable {
 		HttpWrapper wrapper = null;
 		if (jointPoint.getArgs().length > 0) {
 			wrapper = (HttpWrapper) jointPoint.getArgs()[jointPoint.getArgs().length - 1];
@@ -44,10 +44,11 @@ public class AuthenticationAspect {
 		setAuthenticationType(jointPoint);
 		setHttpWrapper(wrapper);
 		if (getUser() != null) {
-			jointPoint.proceed();
+			return jointPoint.proceed();
 		} else {
 			getResponse().sendError(HttpServletResponse.SC_FORBIDDEN);
 		}
+		return null;
 	}
 
 	private void setAuthenticationType(ProceedingJoinPoint pjp) {

@@ -16,7 +16,7 @@ import com.bo.tournament.exception.DataAcessException;
 import com.bo.tournament.hibernate.mapping.TournamentUserMaster;
 
 @Repository
-@Qualifier(value = "UserMgmtJpaDaoImpl")
+//@Qualifier(value = "UserMgmtJpaDaoImpl")
 @Conditional(value=StagingDataSourceCondition.class)
 public class UserMgmtJpaDaoImpl implements UserMgmtDao {
 

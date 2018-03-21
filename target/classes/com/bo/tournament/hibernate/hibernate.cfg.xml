@@ -12,10 +12,10 @@
         <property name="show_sql">true</property>
 		<property name="hbm2ddl.auto">true</property>                
         <property name="format_sql">true</property>
-       <!--  
+       
 		<mapping class="com.bo.tournament.hibernate.mapping.Tournament"/>
 		<mapping class="com.bo.tournament.hibernate.mapping.TournamentUserMaster"/> 
-         -->
+       
        
     </session-factory>
 </hibernate-configuration>

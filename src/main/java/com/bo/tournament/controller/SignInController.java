@@ -22,6 +22,7 @@ public class SignInController {
 	private AuthenticationService signInService;
 	@Inject	
 	public SignInController(AuthenticationService signInService) {
+		
 		this.signInService = signInService;
 	}
 	@RequestMapping(value = "/signIn", method = RequestMethod.GET)

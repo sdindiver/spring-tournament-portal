@@ -10,7 +10,7 @@
 		http://www.springframework.org/schema/aop		
 		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 
-	<beans:bean id="viewResolver"
+	<!-- <beans:bean id="viewResolver"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
 		<beans:property name="prefix" value="" />
 		<beans:property name="suffix" value=".ftl" />
@@ -29,14 +29,14 @@
 		<aop:include name="loggingHandlingAspect" />
 	</aop:aspectj-autoproxy>
 
-	<!-- <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"> 
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"> 
 		<beans:property name="prefix" value="WEB-INF/layouts/jsp/"> </beans:property> 
-		<beans:property name="suffix" value=".jsp"> </beans:property> </beans:bean> -->
+		<beans:property name="suffix" value=".jsp"> </beans:property> </beans:bean>
 	<beans:bean id="jsonMessageConverter"
 		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
 	</beans:bean>
 
-	<!-- Configuring interceptors based on URI -->
+	Configuring interceptors based on URI
 	<interceptors>
 		<beans:bean
 			class="com.bo.tournament.filters.ResourceAccessSecurityInterceptor"></beans:bean>
@@ -69,24 +69,24 @@
 	<annotation-driven validator="passwordMatchvalidator" />
 	<resources location="WEB-INF/resources/**" mapping="/resources/**" />
 	<beans:bean id="passwordMatchvalidator"
-		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
-		
+		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" /> -->
+		<!-- 
 		<beans:bean id="bca" class="com.bo.tournament.controller.BeanNameUrlMappingTestControllers.ByControllerAdaptor"/>
 		<beans:bean id="bhrha" class="com.bo.tournament.controller.BeanNameUrlMappingTestControllers.ByHttpRequestHandlerAdaptor"/>
-		<!--  <beans:bean id="brma" class="com.bo.tournament.controller.BeanNameUrlMappingTestControllers.ByRequestMappingAdaptor"/>
-		<beans:alias name="brma" alias="/byRequestMappingAdaptor"/>  --> 
+		 <beans:bean id="brma" class="com.bo.tournament.controller.BeanNameUrlMappingTestControllers.ByRequestMappingAdaptor"/>
+		<beans:alias name="brma" alias="/byRequestMappingAdaptor"/>  
 		
-		<!-- Default one- Bean name url mapping -->
+		Default one- Bean name url mapping
 		<beans:bean name = "/helloWorld.htm"  class = "com.bo.tournament.controller.BeanNameUrlMappingTestControllers.ByControllerAdaptor" />
 		
 		
 		
 		<beans:alias name="bca" alias="/byControllerAdaptor"/>
-		<beans:alias name="bhrha" alias="/byHttpRequestHandlerAdaptor"/>
+		<beans:alias name="bhrha" alias="/byHttpRequestHandlerAdaptor"/> -->
 		
 
 
 	<!-- Scan for web application components to deploy -->
-	<context:component-scan base-package="com.bo.tournament" />
+	<!-- <context:component-scan base-package="com.bo.tournament" /> -->
 
 </beans:beans>

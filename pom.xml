@@ -121,10 +121,28 @@
 			<version>1.0.0.GA</version>
 		</dependency>
 		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>2.8.5</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>4.0.4.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>4.0.4.RELEASE</version>
+		</dependency>
+
 		<dependency>
 			<groupId>javax.inject</groupId>
 			<artifactId>javax.inject</artifactId>
@@ -187,28 +205,6 @@
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>${jetty.plugin}</version>
-			</plugin>
-			<plugin>
-				<groupId>org.maven.plugin</groupId>
-				<artifactId>maven-timeprinter-plugin</artifactId>
-				<version>${maven.indiver.plugin}</version>
-				<executions>
-					<execution>
-						<id>NamePrinterGoalExecution</id>
-						<phase>compile</phase>
-						<goals>
-							<goal>name-printer</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>NameTimePrinterGoalExecution</id>
-						<phase>validate</phase>
-						<goals>
-							<goal>name-printer</goal>
-							<goal>time-printer</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 

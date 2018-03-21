@@ -34,6 +34,7 @@ public class HibernateUtil {
 		return sessionFactory;
 	}
 	
+	//Usecase over here: not necessary to pass session through method call 
 	public static Session getSession(){
 		sessionLocal.set(sessionFactory.openSession());
 		return sessionLocal.get();

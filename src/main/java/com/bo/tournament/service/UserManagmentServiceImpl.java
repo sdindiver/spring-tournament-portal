@@ -14,7 +14,7 @@ public class UserManagmentServiceImpl implements UserManagementService{
 
 	private UserMgmtDao userMgmtDao;
 	@Inject
-	public UserManagmentServiceImpl(@Qualifier(value="UserMgmtJpaDaoImpl") UserMgmtDao userMgmtDao) {
+	public UserManagmentServiceImpl(/*@Qualifier(value="UserMgmtJpaDaoImpl")*/ UserMgmtDao userMgmtDao) {
 		this.userMgmtDao = userMgmtDao;
 	}
 	

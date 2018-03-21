@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.validation.Valid;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,8 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bo.tournament.annotations.ApiVersion;
+import com.bo.tournament.annotations.ApiVersionLatest;
+import com.bo.tournament.annotations.ApiVersionSupported;
 import com.bo.tournament.annotations.Authenticated;
 import com.bo.tournament.annotations.AuthenticationType;
+import com.bo.tournament.exception.GlobalExceptionHandler;
 import com.bo.tournament.hibernate.mapping.Tournament;
 import com.bo.tournament.model.HttpWrapper;
 import com.bo.tournament.service.TournamentMgmtService;
@@ -29,16 +34,31 @@ public class TournamentController {
 		this.tournamentService=tournamentService;
 	}
 
+	
+	
+	@ApiVersion(value="1.0.0")
+	@RequestMapping(value = "/tournaments", method = RequestMethod.GET)
+	//@RolesAllowed(value="isAuthenticated") -- Can be activated for doing with Aspects
 	@Authenticated(type=AuthenticationType.STATELESS)
-	@RequestMapping(value = "/tournaments", method = RequestMethod.GET, produces = "application/json")
-	public List<Tournament> getRestTournaments(HttpWrapper wrapper) throws InterruptedException {
+	public List<Tournament> getTournaments(HttpWrapper wrapper) throws InterruptedException {
 		List<Tournament> tournamentList = tournamentService.getTournaments();
 		return tournamentList;
 	}
+	
+	@ApiVersion({"1.0.1", "1.0.2"})
+	@ApiVersionSupported
 	@RequestMapping(value = "/tournaments", method = RequestMethod.GET)
-	//@RolesAllowed(value="isAuthenticated")
 	@Authenticated(type=AuthenticationType.STATELESS)
-	public List<Tournament> getTournaments(HttpWrapper wrapper) throws InterruptedException {
+	public List<Tournament> getVersionedTournaments(HttpWrapper wrapper) throws InterruptedException {
+		List<Tournament> tournamentList = tournamentService.getTournaments();
+		return tournamentList;
+	}
+	
+	@ApiVersion("1.0.3")
+    @ApiVersionLatest
+	@RequestMapping(value = "/tournaments", method = RequestMethod.GET)
+	@Authenticated(type=AuthenticationType.STATELESS)
+	public List<Tournament> getVersionedLatestTournaments(HttpWrapper wrapper) throws InterruptedException {
 		List<Tournament> tournamentList = tournamentService.getTournaments();
 		return tournamentList;
 	}
@@ -53,8 +73,9 @@ public class TournamentController {
 	}
 
 	@RequestMapping(value = "/tournaments/{id}", method = RequestMethod.DELETE)
-	public boolean deleteTournament(@PathVariable("id") int tournamentId) throws Exception {
-		return tournamentService.deleteTournament(tournamentId);
+	public ResponseEntity<String> deleteTournament(@PathVariable("id") int tournamentId){
+		throw new GlobalExceptionHandler.ResourceNotFoundException();
+		//return tournamentService.deleteTournament(tournamentId);
 	}
 
 	@RequestMapping(value = "/tournaments/{id}", method = RequestMethod.PUT)
