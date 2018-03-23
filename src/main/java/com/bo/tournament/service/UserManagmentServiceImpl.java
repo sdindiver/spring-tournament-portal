@@ -2,7 +2,6 @@ package com.bo.tournament.service;
 
 import javax.inject.Inject;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 

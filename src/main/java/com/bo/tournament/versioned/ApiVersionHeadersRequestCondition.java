@@ -2,20 +2,20 @@ package com.bo.tournament.versioned;
 
 
 
-import org.springframework.web.servlet.mvc.condition.AbstractRequestCondition;
-import org.springframework.web.servlet.mvc.condition.HeadersRequestCondition;
-import org.springframework.web.servlet.mvc.condition.NameValueExpression;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.constraints.Null;
+import static com.bo.tournament.versioned.ApiVersionHeader.HEADER_NAME;
+import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import static java.util.Objects.isNull;
-import static java.util.Objects.nonNull;
-import static com.bo.tournament.versioned.ApiVersionHeader.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.Null;
+
+import org.springframework.web.servlet.mvc.condition.AbstractRequestCondition;
+import org.springframework.web.servlet.mvc.condition.HeadersRequestCondition;
+import org.springframework.web.servlet.mvc.condition.NameValueExpression;
 
 public class ApiVersionHeadersRequestCondition extends AbstractRequestCondition<ApiVersionHeadersRequestCondition> {
 

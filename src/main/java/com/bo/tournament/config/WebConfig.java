@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.bind.support.ConfigurableWebBindingInitializer;
@@ -17,6 +16,8 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 
 import com.bo.tournament.contraint.UserManagmentBindingInitializer;
 import com.bo.tournament.filters.ResourceAccessSecurityInterceptor;
+import com.bo.tournament.jsonconverter.FieldsFilterImpl;
+import com.bo.tournament.jsonconverter.TournamentJsonConverter;
 import com.bo.tournament.resolver.GlobalArgumentResolver.AccountArgumentResolver;
 import com.bo.tournament.resolver.GlobalArgumentResolver.HttpWrapperArgumentResolver;
 import com.bo.tournament.versioned.ApiVersionRequestMappingHandlerMapping;
@@ -76,7 +77,10 @@ public class WebConfig extends WebMvcConfigurationSupport {
 
 	@Override
 	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-		converters.add(new MappingJackson2HttpMessageConverter());
+		TournamentJsonConverter tournamentMessageConvertor = new TournamentJsonConverter();
+		tournamentMessageConvertor.setFieldFilter(new FieldsFilterImpl());
+		tournamentMessageConvertor.setFieldParam("field");
+		converters.add(tournamentMessageConvertor);
 		super.configureMessageConverters(converters);
 	}
 	
