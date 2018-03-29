@@ -1,6 +1,6 @@
 package com.bo.tournament.jsonconverter;
 
-public class TournamentFieldException extends RuntimeException {
+class TournamentFieldException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 

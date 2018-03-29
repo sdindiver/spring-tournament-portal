@@ -39,27 +39,51 @@ public class TournamentController {
 	@ApiVersion(value="1.0.0")
 	@RequestMapping(value = "/tournaments", method = RequestMethod.GET)
 	//@RolesAllowed(value="isAuthenticated") -- Can be activated for doing with Aspects
-	@Authenticated(type=AuthenticationType.STATELESS)
+	//@Authenticated(type=AuthenticationType.STATELESS)
 	public List<Tournament> getTournaments(HttpWrapper wrapper) throws InterruptedException {
+		System.out.println("starting work" + Thread.currentThread().getName());
 		List<Tournament> tournamentList = tournamentService.getTournaments();
+		System.out.println("End work" + Thread.currentThread().getName());
 		return tournamentList;
 	}
 	
 	@ApiVersion({"1.0.1", "1.0.2"})
 	@ApiVersionSupported
 	@RequestMapping(value = "/tournaments", method = RequestMethod.GET)
-	@Authenticated(type=AuthenticationType.STATELESS)
+	//@Authenticated(type=AuthenticationType.STATELESS)
 	public List<Tournament> getVersionedTournaments(HttpWrapper wrapper) throws InterruptedException {
+//		while(true){
+//			
+//		}
+		
+//		new Thread(()->{
+//			try {
+//				System.out.println(wrapper.getResponse().hashCode());
+//				Thread.sleep(3000l);
+//				wrapper.getResponse().getWriter().write("ram");
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			} 
+//			
+//		}).start();
+//		System.out.println("starting work" + Thread.currentThread().getName());
 		List<Tournament> tournamentList = tournamentService.getTournaments();
+//		System.out.println("End work" + Thread.currentThread().getName());
 		return tournamentList;
 	}
 	
 	@ApiVersion("1.0.3")
     @ApiVersionLatest
 	@RequestMapping(value = "/tournaments", method = RequestMethod.GET)
-	@Authenticated(type=AuthenticationType.STATELESS)
+	//@Authenticated(type=AuthenticationType.STATELESS)
 	public List<Tournament> getVersionedLatestTournaments(HttpWrapper wrapper) throws InterruptedException {
+		System.out.println("starting work" + Thread.currentThread().getName());
 		List<Tournament> tournamentList = tournamentService.getTournaments();
+		System.out.println("End work" + Thread.currentThread().getName());
 		return tournamentList;
 	}
 	

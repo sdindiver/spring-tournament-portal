@@ -7,10 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.jdt.internal.compiler.lookup.AnnotatableTypeSystem;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.Annotation;
 
 
 public class FieldsFilterImpl implements FieldsFilter{

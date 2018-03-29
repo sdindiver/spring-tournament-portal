@@ -16,6 +16,17 @@
 		<servlet-name>tournamentDispatcherServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
+	
+	
+	<servlet>
+		<servlet-name>DatabaseConnectionChecker</servlet-name>
+		<servlet-class>com.bo.tournament.database.DatabaseConnectionChecker</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DatabaseConnectionChecker</servlet-name>
+		<url-pattern>/database-check</url-pattern>
+	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
@@ -41,4 +52,15 @@
 		<param-name>spring.profiles.active</param-name>
 		<param-value>staging</param-value>
 	</context-param>
+	
+	 <filter>
+        <filter-name>UrlRewriteFilter</filter-name>
+        <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>UrlRewriteFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
 </web-app>
