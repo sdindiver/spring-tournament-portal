@@ -1,0 +1,33 @@
+version: "2"
+
+services:
+ release-service:
+  build:
+   context: ../../
+   dockerfile: ./docker/release/Dockerfile
+  volumes:  
+   -  d:/Application_Build_Package/${ARTIFACT}-${VERSION}:/opt/tomcat//webapps/${ARTIFACT}-${VERSION}
+  container_name: "release-service"
+  ports: 
+   - "8080:8080"
+   - "9000:8000"  
+  env_file:
+   - ./EnvironmentConstant.env   
+  networks:
+   - release-app-network 
+ release-database-service:
+  container_name: "release-database-service" 
+  env_file:
+    - ./EnvironmentConstant.env
+  image: mysql
+  ports: 
+   - "3308:3306"
+  volumes:  
+   - ./release-mysql:/var/lib/mysql
+  networks:
+   -  release-app-network
+ 
+  
+networks:
+ release-app-network:
+  driver: bridge   

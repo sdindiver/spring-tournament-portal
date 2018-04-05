@@ -1,0 +1,41 @@
+FROM ubuntu:latest
+
+# Suppress Warning
+ENV TERM=xterm-256color
+
+RUN sed -i "s/http:\/\/archive./http:\/\/nz.archive./g" /etc/apt/sources.list
+
+# This is in accordance to : https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-get-on-ubuntu-16-04
+RUN apt-get update && \
+	apt-get install -y openjdk-8-jdk && \
+	apt-get install -y ant && \
+	apt-get clean && \
+	rm -rf /var/lib/apt/lists/* && \
+	rm -rf /var/cache/oracle-jdk8-installer;
+	
+# Fix certificate issues, found as of 
+# https://bugs.launchpad.net/ubuntu/+source/ca-certificates-java/+bug/983302
+RUN apt-get update && \
+	apt-get install -y ca-certificates-java && \
+	apt-get clean && \
+	update-ca-certificates -f && \
+	rm -rf /var/lib/apt/lists/* && \
+	rm -rf /var/cache/oracle-jdk8-installer;
+
+# Setup JAVA_HOME, this is useful for docker commandline
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
+RUN export JAVA_HOME
+
+WORKDIR /tmp
+ADD http://www-us.apache.org/dist/tomcat/tomcat-8/v8.0.50/bin/apache-tomcat-8.0.50-deployer.tar.gz apache-tomcat-8.0.50-deployer.tar.gz
+
+RUN mkdir /opt/tomcat
+RUN tar xzvf apache-tomcat-8.0.50-deployer.tar.gz -C /opt/tomcat --strip-components=1
+
+
+ENV PORT 8080
+ENV JPDA_ADDRESS 8000
+ENV JPDA_TRANSPORT dt_socket
+
+
+           

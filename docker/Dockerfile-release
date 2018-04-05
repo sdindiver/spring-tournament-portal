@@ -1,0 +1,10 @@
+FROM inovatrend/tomcat8-java8
+
+
+ENV PORT 8080
+ENV JPDA_ADDRESS 8000
+ENV JPDA_TRANSPORT dt_socket
+
+WORKDIR /opt/tomcat/bin
+ENTRYPOINT ["catalina.sh", "jpda", "run"]
+EXPOSE ${PORT}

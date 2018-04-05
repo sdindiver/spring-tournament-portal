@@ -1,0 +1,3 @@
+#!/bin/bash
+echo "$@" Phase is executing.....
+mvn  clean "$@"

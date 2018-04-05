@@ -1,0 +1,36 @@
+version: "2"
+
+services:
+ test-service:
+  build:
+   context: ../../
+   dockerfile: ./docker/dev/Dockerfile
+  container_name: "test-service" 
+  command: 'test'
+  volumes:
+   - .m2:/root/.m2
+ build-service:
+  build:
+   context: ../../
+   dockerfile: ./docker/dev/Dockerfile
+  container_name: "build-service" 
+  command: 'package'
+  env_file:
+    - ./EnvironmentConstant.env
+  volumes:
+   - .m2:/root/.m2
+ database-service:
+  container_name: "database-service" 
+  env_file:
+    - ./EnvironmentConstant.env
+  image: mysql
+  ports: 
+   - "3306:3306"
+  volumes:  
+   - ./dev-mysql:/var/lib/mysql
+  networks:
+   -  app-network
+
+networks:
+ app-network:
+  driver: bridge   
