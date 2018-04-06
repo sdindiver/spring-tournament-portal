@@ -2,11 +2,7 @@ version: "2"
 
 services:
  release-service:
-  build:
-   context: ../../
-   dockerfile: ./docker/release/Dockerfile
-  volumes:  
-   -  d:/Application_Build_Package/${ARTIFACT}-${VERSION}:/opt/tomcat//webapps/${ARTIFACT}-${VERSION}
+  image: indiver/tournament-release-app
   container_name: "release-service"
   ports: 
    - "8080:8080"

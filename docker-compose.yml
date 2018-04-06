@@ -1,19 +1,18 @@
 version: "2"
-
 services: 
- database-service: 
+ release-database-service: 
   image: mysql
   ports: 
    - "3306:3306"
   environment:
    - MYSQL_ROOT_PASSWORD=root
   volumes:  
-   - d:/Application_Build/docker-custom-mysql:/var/lib/mysql
+   - .docker-mysql-data:/var/lib/mysql
   networks: 
    -  tomcatapp-network
 
- webserver-service: 
-  image: tomcat
+ web-service: 
+  image: indiver/new-tournament
   environment:
    - JPDA_ADDRESS=8000
    - JPDA_TRANSPORT=dt_socket
@@ -21,8 +20,6 @@ services:
    - "8080:8080"
    - "9000:8000"   
   command: "catalina.sh jpda run" 
-  volumes:  
-   - ./target/spring-tournament-portal-0.0.1-SNAPSHOT:/usr/local/tomcat/webapps/spring-tournament-portal-0.0.1-SNAPSHOT
   networks: 
    -  tomcatapp-network
   
