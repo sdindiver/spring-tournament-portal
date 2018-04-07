@@ -1,3 +1,3 @@
 #!/bin/bash
-TASK_FAMILY= "Tomcat"
+TASK_FAMILY="Tomcat"
 echo $TASK_FAMILY
