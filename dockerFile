@@ -7,7 +7,7 @@ ENV JPDA_ADDRESS 8000
 ENV JPDA_TRANSPORT dt_socket
 WORKDIR /opt/tomcat/bin
 ENTRYPOINT ["catalina.sh", "jpda", "run"]
-RUN mkdir /tmp/build/
+#RUN mkdir /tmp/build/
 # Add context to /tmp/build/
-ADD . /tmp/build/
+#ADD . /tmp/build/
 EXPOSE ${PORT}
