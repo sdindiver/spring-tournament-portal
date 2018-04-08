@@ -19,7 +19,7 @@ node {
 
    }
     stage('clean') {
-        sh "docker rmi \"\$(docker images --filter 'dangling=true' -q --no-trunc)\""
+        sh "docker images --quiet --filter=dangling=true | xargs --no-run-if-empty docker rmi -f"
    }
 
 }
