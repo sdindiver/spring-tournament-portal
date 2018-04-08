@@ -1,0 +1,30 @@
+# Ignore the virtual environment
+venv
+
+# Ignore test reports
+reports
+./.docker-mysql-data
+./.git
+./.settings
+./docker
+./docker-mysql-data
+./src
+./.classpath
+./gitignore
+./.project
+./docker-compose
+./docker-compose.yml
+./docker-compose.yml.old
+./pom.xml
+./start.bat
+./testdockerfile
+./tomcat.dockerfile
+./update-service.sh
+./target/classes
+./target/generated-sources
+./target/generated-test-sources
+./target/maven-archiver
+./target/maven-status
+./target/surfile-reports
+./target/test-classes
+./target/*.war
