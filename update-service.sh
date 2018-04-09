@@ -1,6 +1,6 @@
 #!/bin/bash
 TASK_FAMILY="Tomcat"
-SERVICE_NAME="TomcatService"
+SERVICE_NAME="TomcatServicenew"
 NEW_DOCKER_IMAGE="194241487024.dkr.ecr.ap-south-1.amazonaws.com/myrepo:latest"
 CLUSTER_NAME="default"
 OLD_TASK_DEF=$(aws ecs describe-task-definition --task-definition $TASK_FAMILY --output json)
