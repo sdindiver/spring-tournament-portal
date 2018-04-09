@@ -4,7 +4,6 @@ venv
 # Ignore test reports
 reports
 ./.docker-mysql-data
-./.git
 ./.settings
 ./docker
 ./docker-mysql-data
