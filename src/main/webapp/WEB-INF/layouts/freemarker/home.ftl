@@ -8,7 +8,7 @@
 <div class="logout"><a href="signout">LOG OUT</a></div>
 	<div class="fix-middle">
 		<div class="container text-center">
-			<h1>Welcome back to the Containerized Home lovely Dude Again `yo!</h1>
+			<h1>Welcome back to the Containerized Home lovely Dude By load balancer!</h1>
 		
 		</div>
 	</div>
