@@ -40,7 +40,9 @@ public class UserMgmtJpaDaoImpl implements UserMgmtDao {
 		TypedQuery<TournamentUserMaster>  typedQuery = entityManager.createQuery(criteriaQuery);
 		TournamentUserMaster userDetails=null;
 		try{
-			userDetails = typedQuery.getSingleResult();	
+			System.out.println("cheking if user exist.....");
+			userDetails = typedQuery.getSingleResult();
+			System.out.println("checked  user exist.....");
 		}catch(NoResultException e){
 			userDetails=null;
 		}
