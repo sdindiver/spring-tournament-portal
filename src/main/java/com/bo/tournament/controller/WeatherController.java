@@ -17,17 +17,17 @@ public class WeatherController {
 	
 	
 	@RequestMapping(value = "/weather", method = RequestMethod.GET)
-	public ResponseEntity<String> getWeather() throws URISyntaxException {
-		
+	public String getWeather() throws URISyntaxException {
+		ResponseEntity<String> response=null;
 		RestTemplate template = new RestTemplate();
 		String weatherAPIUrl = System.getenv("WEATHER_API");
-		
+		 response = new ResponseEntity<>("BLANK",HttpStatus.OK);
 		if(weatherAPIUrl !=null && !weatherAPIUrl.isEmpty()){
 			URI weatherURI = new URI(weatherAPIUrl);
-			return template.getForEntity(weatherURI, String.class);
+			response= template.getForEntity(weatherURI, String.class);
 		}
-		ResponseEntity<String> response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		return response;
+		
+		return response.getBody();
 		
 	}
 

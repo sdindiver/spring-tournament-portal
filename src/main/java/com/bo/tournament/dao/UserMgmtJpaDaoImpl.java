@@ -11,6 +11,7 @@ import javax.persistence.criteria.Root;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bo.tournament.conditional.StagingDataSourceCondition;
@@ -29,7 +30,7 @@ public class UserMgmtJpaDaoImpl implements UserMgmtDao {
 		System.out.println("User Managment Dao Bean creating");
 	}
 
-	@Transactional
+	@Transactional(value = "transactionManager")
 	@Override
 	public TournamentUserMaster getUserDetail(String userName) throws DataAcessException {
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
@@ -50,7 +51,7 @@ public class UserMgmtJpaDaoImpl implements UserMgmtDao {
 		return userDetails;
 	}
 
-	@Transactional
+	@Transactional(value = "transactionManager")
 	@Override
 	public void saveUserDetail(TournamentUserMaster userMaster) throws DataAcessException {
 		entityManager.persist(userMaster);

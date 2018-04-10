@@ -4,7 +4,6 @@ ENV VERSION=0.0.1-SNAPSHOT
 COPY ./target/${ARTIFACT}-${VERSION} /opt/tomcat/webapps/${ARTIFACT}-${VERSION}
 ENV PORT 8080
 ENV JPDA_ADDRESS 8000
-ENV WEATHER_API WETHER-LOAD-BALANCER-1542072245.ap-south-1.elb.amazonaws.com
 ENV JPDA_TRANSPORT dt_socket
 WORKDIR /opt/tomcat/bin
 ENTRYPOINT ["catalina.sh", "jpda", "run"]
