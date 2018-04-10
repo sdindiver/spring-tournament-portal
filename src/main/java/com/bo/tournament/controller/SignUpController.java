@@ -27,7 +27,8 @@ public class SignUpController {
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String register(@Valid SignUpForm form, BindingResult result) throws DuplicateUserNameException {
-		if (result.hasErrors()) {
+		if (result.hasErrors() || form.getConfirmPassword().trim().isEmpty()
+				|| form.getUserName().trim().isEmpty() || form.getPassword().trim().isEmpty()) {
 			return "redirect:/register?error=1";
 		}
 		userManagmentService.registerUser(form);

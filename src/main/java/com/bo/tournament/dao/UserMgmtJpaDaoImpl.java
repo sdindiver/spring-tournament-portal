@@ -34,7 +34,8 @@ public class UserMgmtJpaDaoImpl implements UserMgmtDao {
 				.createQuery(TournamentUserMaster.class);
 		Root<TournamentUserMaster> root = criteriaQuery.from(TournamentUserMaster.class);
 		criteriaQuery = criteriaQuery.where(builder.equal(root.get("username"), userName));
-		return entityManager.createQuery(criteriaQuery).getSingleResult();
+		return (entityManager.createQuery(criteriaQuery).getFirstResult()>0) 
+				? entityManager.createQuery(criteriaQuery).getSingleResult():null;
 	}
 
 	@Transactional

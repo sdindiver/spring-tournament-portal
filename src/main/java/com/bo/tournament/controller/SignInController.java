@@ -32,7 +32,7 @@ public class SignInController {
 
 	@RequestMapping(value = "/signIn", method = RequestMethod.POST)
 	public String signIn(@Valid SignInForm form, BindingResult result, final NativeWebRequest request){
-		if (result.hasErrors()) {
+		if (result.hasErrors() || form.getUserName().trim().isEmpty() || form.getPassword().trim().isEmpty()) {
 			return "redirect:/signIn?error=1";
 		}
 		try{

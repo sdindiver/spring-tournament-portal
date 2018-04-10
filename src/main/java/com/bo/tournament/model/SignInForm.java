@@ -2,15 +2,18 @@ package com.bo.tournament.model;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class SignInForm {
 	
 	@NotEmpty
+	@NotBlank
 	@JsonProperty("user_username")
 	private String userName;
 	@NotEmpty
+	@NotBlank
 	@JsonProperty("user_password")
 	private String password;
 	
