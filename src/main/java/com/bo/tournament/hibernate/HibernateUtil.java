@@ -45,11 +45,6 @@ public class HibernateUtil {
 		session.close();
 	}
 	
-	public static void main(String[] args) {
-		ArrayList<Integer> list = new ArrayList<>();
-		list.add(5);
-		UserMgmtDao dao = new UserMgmtDaoImpl();
-		System.out.println(dao.getUserDetail("bajrang").getPassword());
-	}
+	
 
 }

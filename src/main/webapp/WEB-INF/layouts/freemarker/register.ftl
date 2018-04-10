@@ -14,7 +14,7 @@
 				order to test a registration dialog box.<br> If you like it,
 				you are welcomed to use it wherever you want, no strings attached.<br>
 				<br>
-				<a href="#" class="link dialog-reset">Rerun the whole thing.</a>
+				<a href="${springMacroRequestContext.contextPath}" class="link dialog-reset">Back To Home</a>
 			</p>
 		</div>
 	</div>

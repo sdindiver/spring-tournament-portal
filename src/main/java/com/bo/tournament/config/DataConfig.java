@@ -1,5 +1,6 @@
 package com.bo.tournament.config;
 
+import java.util.Optional;
 import java.util.Properties;
 
 import javax.inject.Inject;
@@ -20,6 +21,14 @@ import com.mysql.cj.jdbc.MysqlDataSource;
 @Configuration
 public class DataConfig {
 	
+	public static String getEnvironmentPropertyValue(String key,Environment environment){
+		String value = environment.getProperty(key);
+		if(Optional.ofNullable(System.getenv(key)).isPresent()){
+			value = System.getenv(key);
+		}
+		return value;
+	}
+	
 	
 	@Configuration
 	@Profile("staging")
@@ -29,9 +38,9 @@ public class DataConfig {
 		@Bean
 		public DataSource dataSource() {
 			MysqlDataSource dataSource = new MysqlDataSource();
-			dataSource.setUrl(environment.getProperty("database.url"));
-			dataSource.setUser(environment.getProperty("database.username"));
-			dataSource.setPassword(environment.getProperty("database.password"));
+			dataSource.setUrl(getEnvironmentPropertyValue("database.url", environment));
+			dataSource.setUser(getEnvironmentPropertyValue("database.username", environment));
+			dataSource.setPassword(getEnvironmentPropertyValue("database.password", environment));
 			return dataSource;
 		}
 
@@ -62,19 +71,15 @@ public class DataConfig {
 	@Configuration
 	@Profile("development")
 	static class Development{
-		private Environment environment;
-		
 		@Inject
-		public Development( Environment environment) {
-			this.environment = environment;
-		}
-		
+		private Environment environment;
+			
 		@Bean(name="dataSource")
 		public DataSource hibernateDataSource() {
 			MysqlDataSource dataSource = new MysqlDataSource();
-			dataSource.setUrl(environment.getProperty("database.url"));
-			dataSource.setUser(environment.getProperty("database.username"));
-			dataSource.setPassword(environment.getProperty("database.password"));
+			dataSource.setUrl(getEnvironmentPropertyValue("database.url", environment));
+			dataSource.setUser(getEnvironmentPropertyValue("database.username", environment));
+			dataSource.setPassword(getEnvironmentPropertyValue("database.password", environment));
 			return dataSource;
 		}
 		
@@ -84,9 +89,9 @@ public class DataConfig {
 			sessionFactoryBean.setDataSource(dataSource);
 			sessionFactoryBean.setPackagesToScan("com.bo.tournament");
 			Properties hibernateProperties = new Properties();
-			hibernateProperties.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
-			hibernateProperties.put("hibernate.show_sql", environment.getRequiredProperty("hibernate.show_sql"));
-			hibernateProperties.put("hibernate.format_sql", environment.getRequiredProperty("hibernate.format_sql"));
+			hibernateProperties.put("hibernate.dialect", getEnvironmentPropertyValue("hibernate.dialect", environment));
+			hibernateProperties.put("hibernate.show_sql", getEnvironmentPropertyValue("hibernate.show_sql", environment));
+			hibernateProperties.put("hibernate.format_sql", getEnvironmentPropertyValue("hibernate.format_sql", environment));
 
 			sessionFactoryBean.setHibernateProperties(hibernateProperties);
 			return sessionFactoryBean;

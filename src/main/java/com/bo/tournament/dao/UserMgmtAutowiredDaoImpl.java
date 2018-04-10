@@ -1,11 +1,13 @@
 package com.bo.tournament.dao;
 
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +16,7 @@ import com.bo.tournament.exception.DataAcessException;
 import com.bo.tournament.hibernate.mapping.TournamentUserMaster;
 
 @Repository
-//@Qualifier(value="UserMgmtAutowiredDaoImpl")
+@Qualifier(value="UserMgmtAutowiredDaoImpl")
 @Conditional(value=DevDataSourceCondition.class)
 public class UserMgmtAutowiredDaoImpl implements UserMgmtDao {
 

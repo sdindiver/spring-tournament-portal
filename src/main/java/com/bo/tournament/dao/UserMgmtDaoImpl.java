@@ -5,6 +5,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +14,7 @@ import com.bo.tournament.exception.DataAcessException;
 import com.bo.tournament.hibernate.HibernateUtil;
 import com.bo.tournament.hibernate.mapping.TournamentUserMaster;
 @Repository
-//@Qualifier(value="UserMgmtDaoImpl")
+@Qualifier(value="UserMgmtDaoImpl")
 @Conditional(value=DevDataSourceCondition.class)
 public class UserMgmtDaoImpl implements UserMgmtDao {
 	

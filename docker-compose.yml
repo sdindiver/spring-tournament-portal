@@ -3,7 +3,7 @@ services:
  release-database-service: 
   image: mysql
   ports: 
-   - "3306:3306"
+   - "3307:3306"
   environment:
    - MYSQL_ROOT_PASSWORD=root
   volumes:  
@@ -16,6 +16,8 @@ services:
   environment:
    - JPDA_ADDRESS=8000
    - JPDA_TRANSPORT=dt_socket
+   - spring.profiles.active=staging
+   - USER_DAO=com.bo.tournament.dao.UserMgmtJpaDaoImpl
   ports: 
    - "8080:8080"
    - "9000:8000"   

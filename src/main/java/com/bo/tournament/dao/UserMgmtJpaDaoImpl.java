@@ -1,11 +1,14 @@
 package com.bo.tournament.dao;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +18,7 @@ import com.bo.tournament.exception.DataAcessException;
 import com.bo.tournament.hibernate.mapping.TournamentUserMaster;
 
 @Repository
-//@Qualifier(value = "UserMgmtJpaDaoImpl")
+@Qualifier(value = "UserMgmtJpaDaoImpl")
 @Conditional(value=StagingDataSourceCondition.class)
 public class UserMgmtJpaDaoImpl implements UserMgmtDao {
 
@@ -26,7 +29,7 @@ public class UserMgmtJpaDaoImpl implements UserMgmtDao {
 		System.out.println("User Managment Dao Bean creating");
 	}
 
-	@Transactional(readOnly = true)
+	@Transactional
 	@Override
 	public TournamentUserMaster getUserDetail(String userName) throws DataAcessException {
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
@@ -34,8 +37,15 @@ public class UserMgmtJpaDaoImpl implements UserMgmtDao {
 				.createQuery(TournamentUserMaster.class);
 		Root<TournamentUserMaster> root = criteriaQuery.from(TournamentUserMaster.class);
 		criteriaQuery = criteriaQuery.where(builder.equal(root.get("username"), userName));
-		return (entityManager.createQuery(criteriaQuery).getFirstResult()>0) 
-				? entityManager.createQuery(criteriaQuery).getSingleResult():null;
+		TypedQuery<TournamentUserMaster>  typedQuery = entityManager.createQuery(criteriaQuery);
+		TournamentUserMaster userDetails=null;
+		try{
+			userDetails = typedQuery.getSingleResult();	
+		}catch(NoResultException e){
+			userDetails=null;
+		}
+		
+		return userDetails;
 	}
 
 	@Transactional

@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.bo.tournament.config.RepositoryFactory;
 import com.bo.tournament.dao.UserMgmtDao;
 import com.bo.tournament.hibernate.mapping.TournamentUserMaster;
 import com.bo.tournament.model.SignUpForm;
@@ -13,9 +14,10 @@ public class UserManagmentServiceImpl implements UserManagementService{
 
 	private UserMgmtDao userMgmtDao;
 	@Inject
-	public UserManagmentServiceImpl(/*@Qualifier(value="UserMgmtJpaDaoImpl")*/ UserMgmtDao userMgmtDao) {
-		this.userMgmtDao = userMgmtDao;
+	public UserManagmentServiceImpl(RepositoryFactory daoFactory) {
+		this.userMgmtDao = daoFactory.getRepository();
 	}
+	
 	
 	@Override
 	public void registerUser(SignUpForm form) throws DuplicateUserNameException {

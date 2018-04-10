@@ -1,19 +1,20 @@
 package com.bo.tournament.oauth;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Service;
 
-import com.bo.tournament.dao.UserMgmtDao;
+import com.bo.tournament.config.RepositoryFactory;
 import com.bo.tournament.hibernate.mapping.TournamentUserMaster;
 
 @Service
 public class OAuthServiceImpl implements OAuthService{
 	
-	@Autowired
-	UserMgmtDao userDao;
+	@Inject
+	RepositoryFactory factory;
 	@Override
 	public TournamentUserMaster getUserDetail(String username) {
-		return userDao.getUserDetail(username);
+		return factory.getRepository().getUserDetail(username);
 	}
 
 }
