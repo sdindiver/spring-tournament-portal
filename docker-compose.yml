@@ -16,8 +16,8 @@ services:
   environment:
    - JPDA_ADDRESS=8000
    - JPDA_TRANSPORT=dt_socket
-   - spring.profiles.active=staging
-   - USER_DAO=com.bo.tournament.dao.UserMgmtJpaDaoImpl
+   - spring.profiles.active=development
+   - USER_DAO=com.bo.tournament.dao.UserMgmtAutowiredDaoImpl
    - WEATHER_API=http://WETHER-LOAD-BALANCER-1542072245.ap-south-1.elb.amazonaws.com/status
   ports: 
    - "8080:8080"

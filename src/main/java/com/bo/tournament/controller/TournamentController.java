@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.validation.Valid;
 
+import org.apache.commons.logging.Log;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -26,6 +27,8 @@ import com.bo.tournament.service.TournamentMgmtService;
 @RestController
 @RequestMapping(value = "/")
 public class TournamentController {
+	
+	
 
 	
 	TournamentMgmtService tournamentService;
@@ -89,7 +92,7 @@ public class TournamentController {
 	
 
 	@RequestMapping(value = "/tournaments/{id}", method = RequestMethod.GET, produces = "application/json")
-	@Authenticated(type=AuthenticationType.STATEFULL)
+	//@Authenticated(type=AuthenticationType.STATEFULL)
 	public Tournament getTournament(@PathVariable("id") int tournamentId,HttpWrapper wrapper) {
 		Tournament tournament = tournamentService.getTournament(tournamentId);
 		return tournament;

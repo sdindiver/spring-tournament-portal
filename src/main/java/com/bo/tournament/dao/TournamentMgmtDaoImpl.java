@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.bo.tournament.hibernate.HibernateUtil;
@@ -12,20 +14,26 @@ import com.bo.tournament.hibernate.mapping.Tournament;
 @Repository
 public class TournamentMgmtDaoImpl implements TournamentMgmtDao {
 
+	@Autowired
+	SessionFactory sessionFactory;
+	
 	@Override
 	public List<Tournament> getTournaments() {
-		Session session = HibernateUtil.getSession();
+		//Session session = HibernateUtil.getSession();
+		Session session = sessionFactory.openSession();
 		Criteria crit = session.createCriteria(Tournament.class);
 		List<Tournament> list = (List<Tournament>) crit.list();
-		HibernateUtil.closeSession();
+		//HibernateUtil.closeSession();
+		session.close();
 		return list;
 	}
 
 	@Override
 	public Tournament getTournament(int tournamentId) {
-		Session session = HibernateUtil.getSession();
+		Session session = sessionFactory.openSession();
 		Tournament tournament = (Tournament) session.get(Tournament.class, tournamentId);
-		HibernateUtil.closeSession();
+		//HibernateUtil.closeSession();
+		session.close();
 		return tournament;
 	}
 

@@ -41,6 +41,8 @@ public class DataConfig {
 		private Environment environment;
 		@Bean
 		public DataSource dataSource() {
+			System.setProperty("hibernate.generate_statistics", "true");
+			
 			MysqlDataSource dataSource = new MysqlDataSource();
 			dataSource.setUrl(getEnvironmentPropertyValue("database.url", environment));
 			dataSource.setUser(getEnvironmentPropertyValue("database.username", environment));
@@ -96,6 +98,15 @@ public class DataConfig {
 			hibernateProperties.put("hibernate.dialect", getEnvironmentPropertyValue("hibernate.dialect", environment));
 			hibernateProperties.put("hibernate.show_sql", getEnvironmentPropertyValue("hibernate.show_sql", environment));
 			hibernateProperties.put("hibernate.format_sql", getEnvironmentPropertyValue("hibernate.format_sql", environment));
+			hibernateProperties.put("hibernate.connection.provider_class", "org.hibernate.c3p0.internal.C3P0ConnectionProvider");
+			hibernateProperties.put("hibernate.cache.region.factory_class", "ehcache");
+//			hibernateProperties.put("hibernate.cache.region.factory_class", org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory.class);
+			hibernateProperties.put("hibernate.cache.use_second_level_cache", true);
+			hibernateProperties.put("hibernate.c3p0.min_size", 5);
+			hibernateProperties.put("hibernate.c3p0.min_size", 20);
+			hibernateProperties.put("hibernate.c3p0.max_statements", 50);
+			hibernateProperties.put("hibernate.c3p0.idle_test_period", 3000);
+			//hibernateProperties.put("hibernate.cache.use_query_cache", true);
 
 			sessionFactoryBean.setHibernateProperties(hibernateProperties);
 			return sessionFactoryBean;

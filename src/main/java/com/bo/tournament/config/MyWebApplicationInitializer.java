@@ -1,8 +1,11 @@
 package com.bo.tournament.config;
 
+import java.io.File;
+
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
+import org.apache.log4j.PropertyConfigurator;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.WebApplicationInitializer;
 
@@ -11,6 +14,8 @@ public class MyWebApplicationInitializer implements WebApplicationInitializer {
  
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
+    	String log4jConfigFile = System.getProperty("user.dir")+ File.separator + "log4j.properties";
+    	PropertyConfigurator.configure(log4jConfigFile);
     	setActiveProfile(servletContext);
     }
     
@@ -23,4 +28,5 @@ public class MyWebApplicationInitializer implements WebApplicationInitializer {
     		servletContext.setInitParameter("spring.profiles.active", System.getenv("spring.profiles.active"));
     	}
     }
+
 }

@@ -6,6 +6,7 @@ ENV PORT 8080
 ENV JPDA_ADDRESS 8000
 ENV JPDA_TRANSPORT dt_socket
 WORKDIR /opt/tomcat/bin
+COPY ./log4j.properties ./
 ENTRYPOINT ["catalina.sh", "jpda", "run"]
 #RUN mkdir /tmp/build/
 # Add context to /tmp/build/
